@@ -23,6 +23,6 @@ public class RendezVous {
     // un rendezvous , necessite un medecin
     @ManyToOne
     private Medecin medecin;
-    @OneToOne
+    @OneToOne(mappedBy = "rendezVous")
     private Consultation consultation;
 }
