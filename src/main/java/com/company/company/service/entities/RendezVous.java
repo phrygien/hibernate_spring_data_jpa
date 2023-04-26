@@ -15,6 +15,7 @@ public class RendezVous {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false)
     private Date date;
     private StatusRDV statusRDV;
     // un rendezvous pour un patient
