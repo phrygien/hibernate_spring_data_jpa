@@ -17,11 +17,17 @@ public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(length = 150, nullable = false)
     private String nom;
+
     @Temporal(TemporalType.DATE)
+    @Column(nullable = false)
     private Date dateNaissance;
+
     private boolean malade;
     //un patient peut effectué plusieur rendez vous
+
     @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY)
     private Collection<RendezVous> rendezVous;
 }
