@@ -1,6 +1,8 @@
 package com.company.company.service;
 
+import com.company.company.service.entities.Medecin;
 import com.company.company.service.entities.Patient;
+import com.company.company.service.repositories.MedecinRepository;
 import com.company.company.service.repositories.PatientRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -20,7 +22,7 @@ public class CompanyServiceApplication {
 
     // methode qui s'execute au demmarage
     @Bean
-    CommandLineRunner start(PatientRepository patientRepository)
+    CommandLineRunner start(PatientRepository patientRepository, MedecinRepository medecinRepository)
     {
         return args -> {
             //patientRepository.save(new Patient(null,"Mecene", new Date(), false,null));
@@ -31,6 +33,15 @@ public class CompanyServiceApplication {
                 patient.setMalade(false);
 
                 patientRepository.save(patient);
+            });
+
+            // création medecin
+            Stream.of("Medecin 01", "Medecin 02", "Medecin 03").forEach(name->{
+                Medecin medecin = new Medecin();
+                medecin.setNom(name);
+                medecin.setSpecialite(Math.random()>0.5 ? "Cardio":"Dentiste");
+                medecin.setEmail("email.medecin@spring.dev");
+                medecinRepository.save(medecin);
             });
         };
     }
